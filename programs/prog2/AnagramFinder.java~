@@ -1,0 +1,110 @@
+//Joshua Cheung
+//CMPS-12A
+//findAnagrams
+
+
+
+import java.util.*;
+import java.io.*;
+
+public class Anagramfinder
+{
+    public static void main(Stirng[] args) 
+    {
+        List listOfWords = loadWords(args[0]);
+        boolean done = false;
+        while (!done) 
+        {
+            List matchedWords = new ArrayList();
+            System.out.println("Type a string of letters"); 
+            Scanner word = new Scanner(System.in);
+            String userWord = word;
+            for (String word : listOfWords) 
+            {
+                if ( (otherWord.length() == word.length()) && (alphabetizeWord(userWord).equals(alphabetizeWord(word))))
+                {
+                    matchedWords.append(word);
+                }
+                System.out.println(matchedWords);
+            }
+            System.out.println("Do another (y/n)? ");
+            String yesOrNo = word;
+            if(yesOrNo.equals(y))
+            {
+                done = true;
+            }
+        }
+    }
+
+    public static List loadWords(Stirng filename)
+    {
+        List wordList = new ArrayList();
+        File file = new File(args[0]); //should be a number to loop through entire list
+        Scanner in = new Scanner(file);
+        int count = in.nextInt();  // take the first line that is a number
+        for (int i; i < count; i++) 
+        {
+            String word = in.next(); //takes the next word/String
+            // String alphaWord = alphabetaize(word); 
+            wordList.add(word);
+        }   
+        return wordList; // return the wordList because I want to load all the words into a new readable list
+    }
+
+    public static List findListfor(String alphaWord, List listOfWords)
+    {
+        for (List wlist : listOfWords) // loops through the entire lists of listOfWord.
+        {  
+            String alphaWordInList = wlist.get(0); // get the first element from the list (which represent alphaWord of the list)
+            if (alphaWordInList.equals(alphaWord)) // if the alphaWord is the same, then we found the list.
+            {  
+                return wlist; // because you want a list of all the matched words
+            }
+        }
+        return null; //because it's not there
+    }
+
+    public static List findAnagramList(String word, List listOfWords)
+    {
+        String alphaWord = alphabetaize(word);
+        List alphaWordList = findListFor(alphaWord, listOfWords); // return a new list that excludes word from alphaWordList.  
+        List buddiesList = new ArrayList();
+        for (int i = 1; i < alphaWordList.length; i++) //one because you want to skip the first alphabetized word that is not part of the list
+        {   
+            if (!alphaWordList.get(i).equals(word))  
+            {
+                buddiesList.add(alphaWordList.get(i));
+            }
+        }
+        return buddiesList;
+    }
+
+
+    public static List loadWords(String filename)
+    {  
+        List wordLists = new ArrayList();  // Create the List for List<String>, that is empty to start with.
+        File file = new File(filename);   // create the File object.
+        Scanner in = new Scanner(file);   // create the scanner of the file.
+   
+        int count = in.nextInt();  // take the first line, which should be the number of words.
+        for (int i; i < count; i++) // loop number of words times (to read the file)
+        {  
+            String word = in.next();    // take the next line (should be the words)
+            String alphaWord = alphabetaize(word);  // alphabetize word => alphaWord // search and see if alphaWord is already there.
+            List targetList = findListFor(alphaWord, wordList);
+            if (targetList != null) 
+            {  // if the alphaWord list is already there 
+                targetList.add(word);  // just need to add the new word with the same alphaWord into the list. 'items'
+            }   
+            else 
+            {  // list is not found... we need to create a new list to append to the list of list of words.
+                // new list.
+                List newList = new ArrayList();  // creates the new list
+                newList.add(alphaWord);  // add alphaWord as the first element. 'eimst'
+                newList.add(word);       // add the first word. 'emits'
+                wordLists.add(newList);
+            }
+        }
+        return wordLists;
+    }           
+}

@@ -1,0 +1,342 @@
+Script started on Sun 01 May 2016 08:39:02 PM PDT
+[?1034hbash-4.2$ car[Kt An[K[KDing[K[K[K[KD[KFindingAnagrams.jv[Kava
+//Joshua Cheung                                                                                                                                  
+//CMPS-12A                                                                                                                                       
+//FindingAnagrams                                                                                                                                
+
+//What my program does is it takes the length of the input word and compares it to the arrayList of words already sorted from                    
+//shortest to longest word in the dicitonary.                                                                                                    
+//In doing this, the function compareWord looks at the alphabetized words of each on in the list.                                                
+//for example, if the word length inputed was 4, it would look through the bucket that contains the words                                        
+//in the dictionary with the length of four letters.                                                                                             
+//Then by comparing the alphabetized order of the words, it checks if they are equal to one another.                                             
+//if it is, then it is an anagram and adds into a list.
+
+
+import java.util.*;
+import java.io.*;
+
+public class FindingAnagrams
+{
+    public static void main(String[] args) throws FileNotFoundException
+    {
+	List<String>[] loadedWords = loadWords(args[0]);
+
+        boolean done = false;
+        while (!done) 
+	    {
+		System.out.println("Type a string of letters"); 
+		Scanner scanner = new Scanner(System.in);
+		String userWord = scanner.next();
+		List<String> words = compareWord(userWord, loadedWords);
+		for (String word : words)
+		{
+		    System.out.println(word);
+		}
+		System.out.println("Do another (y/n)? ");
+		String yesOrNo = scanner.next();
+		if(yesOrNo.equals("n"))
+		    {
+			done = true;
+		    }
+		else if(!yesOrNo.equals("y"))
+		    {
+			System.out.println("Sorry, that is not a valid input");
+			System.out.println("Goodbye");
+			done = true;
+			
+		    }
+	    }
+    }
+
+    public static List[] loadWords(String filename) throws FileNotFoundException
+    {
+	List<String>[] listByLength = new ArrayList[40];
+	for(int i = 0; i < 40; i++)
+	{
+	    listByLength[i] = new ArrayList<String>();
+	}
+        //List wordList = new ArrayList();
+        File file = new File(filename); //should be a number to loop through entire list
+        Scanner in = new Scanner(file);
+        int count = in.nextInt();  // take the first line that is a number
+        for (int i = 0; i < count; i++) 
+	    {
+		String word = in.next(); //takes the next word/String
+		List<String> listToUse = listByLength[word.length()];
+		listToUse.add(word);
+	    }
+        return listByLength; // return the wordList because I want to load all the words into a new readable list
+    }
+    
+    
+    public static List<String> compareWord(String word, List<String>[] loadedWords)
+    {
+        List<String> acceptedList = new ArrayList<String>();
+	if (word.length() > loadedWords.length)
+	{
+	    return new ArrayList<String>();
+	}
+	List<String> listToUse = loadedWords[word.length()];
+        for(String stri : listToUse)
+        { 
+	    if(alphabetize(stri).equals(alphabetize(word)) && !(stri.equals(word)))
+	    {
+		acceptedList.add(stri);
+	    }
+	}
+	return acceptedList;
+    }
+
+    static String alphabetize(String word)
+    {
+        char[] alphaWord = word.toCharArray();
+        Arrays.sort(alphaWord);
+        return new String(alphaWord);
+    }
+}
+bash-4.2$ javac FindingAnagrams.java
+Note: FindingAnagrams.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+bash-4.2$ java FindingAnagrams W[KwordList.txt
+Type a string of letters
+items
+emits
+metis
+mites
+smite
+stime
+times
+Do another (y/n)? 
+y
+Type a string of letters
+h hello
+Do another (y/n)? 
+bleck
+Sorry, that is not a valid input
+Goodbye
+bash-4.2$ sc[Kxit[K[K[K[Kexit
+exit
+
+Script done on Sun 01 May 2016 08:40:13 PM PDT
+s
+FindingAnagrams.java:53: error: cannot find symbol
+        for (int j = 1; i < count; i++) 
+                        ^
+  symbol:   variable i
+  location: class FindingAnagrams
+FindingAnagrams.java:53: error: cannot find symbol
+        for (int j = 1; i < count; i++) 
+                                   ^
+  symbol:   variable i
+  location: class FindingAnagrams
+Note: FindingAnagrams.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 errors
+bash-4.2$ javac FindingAnagrams.java~[C[C[C[C[C[C[C[C[C[C[2Pcat[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C~[K[C[C[C[C[C[C[C[C[C[Ctcsh[K[2Plsjavac FindingAnagrams.java[C[C[C[C[C[C[C[C[C[Cls[K
+AnagramFinder.class  AnagramFinder.java~    FindingAnagrams.java   FindingAnagrams_Working.java  PAnScriptFile
+AnagramFinder.java   FindingAnagrams.class  FindingAnagrams.java~  FindingAnagrams_x.java	 wordList.txt
+bash-4.2$ remi[K[K [K[Km di[K[K[Kdir Ana[K[K[KFindingAnagrams.java
+rmdir: failed to remove ‘FindingAnagrams.java’: Not a directory
+bash-4.2$ rm FindingAnagrams.java
+bash-4.2$ mv [K[K[Kmv FindingAnagrams.java~ FindingAnagrams.java
+bash-4.2$ tcsh
+setenv: Too many arguments.
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ ls
+AnagramFinder.class  AnagramFinder.java~    FindingAnagrams.java          FindingAnagrams_x.java  wordList.txt
+AnagramFinder.java   FindingAnagrams.class  FindingAnagrams_Working.java  PAnScriptFile
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ javac Finding Anagrams.java[Ka
+Note: FindingAnagrams.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ java Findinganagra[K[K[K[K[K[KAnagrams wordList.txt
+Type a string of letters
+hello
+Do another (y/n)? 
+y
+Type a string of letters
+give
+Do another (y/n)? 
+y
+Type a string of letters
+blender
+reblend
+Do another (y/n)? 
+y
+Type a string of letters
+phonebook
+Do another (y/n)? 
+y
+Type a string of letters
+chopstick
+Do another (y/n)? 
+y
+Type a string of letters
+race
+acre
+care
+Do another (y/n)? 
+blev h
+Sorry, that is not a valid input
+Goodbye
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ exit
+exit
+bash-4.2$ tcsh
+setenv: Too many arguments.
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ ls
+AnagramFinder.class  AnagramFinder.java~    FindingAnagrams.java          FindingAnagrams_x.java  wordList.txt
+AnagramFinder.java   FindingAnagrams.class  FindingAnagrams_Working.java  PAnScriptFile
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ script Pa[KAnScriptFile
+Script started, file is PAnScriptFile
+[?1034hbash-4.2$ car[Kt An[K[KDing[K[K[K[KD[KFindingAnagrams.jv[Kava
+//Joshua Cheung                                                                                                                                  
+//CMPS-12A                                                                                                                                       
+//FindingAnagrams                                                                                                                                
+
+//What my program does is it takes the length of the input word and compares it to the arrayList of words already sorted from                    
+//shortest to longest word in the dicitonary.                                                                                                    
+//In doing this, the function compareWord looks at the alphabetized words of each on in the list.                                                
+//for example, if the word length inputed was 4, it would look through the bucket that contains the words                                        
+//in the dictionary with the length of four letters.                                                                                             
+//Then by comparing the alphabetized order of the words, it checks if they are equal to one another.                                             
+//if it is, then it is an anagram and adds into a list.
+
+
+import java.util.*;
+import java.io.*;
+
+public class FindingAnagrams
+{
+    public static void main(String[] args) throws FileNotFoundException
+    {
+	List<String>[] loadedWords = loadWords(args[0]);
+
+        boolean done = false;
+        while (!done) 
+	    {
+		System.out.println("Type a string of letters"); 
+		Scanner scanner = new Scanner(System.in);
+		String userWord = scanner.next();
+		List<String> words = compareWord(userWord, loadedWords);
+		for (String word : words)
+		{
+		    System.out.println(word);
+		}
+		System.out.println("Do another (y/n)? ");
+		String yesOrNo = scanner.next();
+		if(yesOrNo.equals("n"))
+		    {
+			done = true;
+		    }
+		else if(!yesOrNo.equals("y"))
+		    {
+			System.out.println("Sorry, that is not a valid input");
+			System.out.println("Goodbye");
+			done = true;
+			
+		    }
+	    }
+    }
+
+    public static List[] loadWords(String filename) throws FileNotFoundException
+    {
+	List<String>[] listByLength = new ArrayList[40];
+	for(int i = 0; i < 40; i++)
+	{
+	    listByLength[i] = new ArrayList<String>();
+	}
+        //List wordList = new ArrayList();
+        File file = new File(filename); //should be a number to loop through entire list
+        Scanner in = new Scanner(file);
+        int count = in.nextInt();  // take the first line that is a number
+        for (int i = 0; i < count; i++) 
+	    {
+		String word = in.next(); //takes the next word/String
+		List<String> listToUse = listByLength[word.length()];
+		listToUse.add(word);
+	    }
+        return listByLength; // return the wordList because I want to load all the words into a new readable list
+    }
+    
+    
+    public static List<String> compareWord(String word, List<String>[] loadedWords)
+    {
+        List<String> acceptedList = new ArrayList<String>();
+	if (word.length() > loadedWords.length)
+	{
+	    return new ArrayList<String>();
+	}
+	List<String> listToUse = loadedWords[word.length()];
+        for(String stri : listToUse)
+        { 
+	    if(alphabetize(stri).equals(alphabetize(word)) && !(stri.equals(word)))
+	    {
+		acceptedList.add(stri);
+	    }
+	}
+	return acceptedList;
+    }
+
+    static String alphabetize(String word)
+    {
+        char[] alphaWord = word.toCharArray();
+        Arrays.sort(alphaWord);
+        return new String(alphaWord);
+    }
+}
+bash-4.2$ javac FindingAnagrams.java
+Note: FindingAnagrams.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+bash-4.2$ java FindingAnagrams W[KwordList.txt
+Type a string of letters
+items
+emits
+metis
+mites
+smite
+stime
+times
+Do another (y/n)? 
+y
+Type a string of letters
+h hello
+Do another (y/n)? 
+bleck
+Sorry, that is not a valid input
+Goodbye
+bash-4.2$ sc[Kxit[K[K[K[Kexit
+exit
+Script done, file is PAnScriptFile
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ scp jotcheun@us[Knix.ic.us[Kcsc.edi[Ku:Pa[KAnfile[K[K[K[KScriptFile /Jo[K[K[K/Users/Joshua/Downloads/Compsci
+jotcheun@unix.ic.ucsc.edu's password: 
+scp: PAnScriptFile: No such file or directory
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ ls
+AnagramFinder.class  AnagramFinder.java~    FindingAnagrams.java          FindingAnagrams_x.java  wordList.txt
+AnagramFinder.java   FindingAnagrams.class  FindingAnagrams_Working.java  PAnScriptFile
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ lsscp jotcheun@unix.ic.ucsc.edu:PAnScriptFile /Users/Joshua/Downloads/Compsci[27Gript PAnScriptFile[K[27Gp jotcheun@unix.ic.ucsc.edu:PAnScriptFile /Users/Joshua/Downloads/Compsci[1@-[1@i[1@ 
+usage: scp [-12346BCpqrv] [-c cipher] [-F ssh_config] [-i identity_file]
+           [-l limit] [-o ssh_option] [-P port] [-S program]
+           [[user@]host1:]file1 ... [[user@]host2:]file2
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ pwd
+/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ scp [Kp joth[Kcheun@uc[Knix.ic.ucsc,ed[K[K[K.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/ Pa[KA[K[KP
+jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/ not found
+
+[K]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ scp jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile //Users/Joshua/Downloads/Compsci[PUsers/Joshua/Downloads/Compsci
+jotcheun@unix.ic.ucsc.edu's password: 
+/Users/Joshua/Downloads/Compsci: No such file or directory
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ scp jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile /Users/Joshua/Downloads/Compsci[A[25Gpwd[K[116G p[K[A[28Gscp -i jotcheun@unix.ic.ucsc.edu:PAnScriptFile /Users/Joshua/Downloads/Compsci[25Gls[Kscp jotcheun@unix.ic.ucsc.edu:PAnScriptFile /Users/Joshua/Downloads/Compsci[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K~desktop
+jotcheun@unix.ic.ucsc.edu's password: 
+scp: PAnScriptFile: No such file or directory
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ ls
+AnagramFinder.class  AnagramFinder.java~    FindingAnagrams.java          FindingAnagrams_x.java  wordList.txt
+AnagramFinder.java   FindingAnagrams.class  FindingAnagrams_Working.java  PAnScriptFile
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ cd PAnScriptFile 
+PAnScriptFile: Not a directory.
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ look Pa[KAnScriptFile 
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ look PAnScriptFile[25G[2Pcd[41G[25G[2@look[43G[25G[Klook PAnScriptFile[25G[2Pcd[41G[25Gls[Kscp jotcheun@unix.ic.ucsc.edu:PAnScriptFile ~desktop[55G/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile /Users/Joshua/Downloads/Compsci[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K ![K~/desktop
+jotcheun@unix.ic.ucsc.edu's password: 
+PAnScriptFile                                                                       0%    0     0.0KB/s   --:-- ETAPAnScriptFile                                                                     100%   12KB  12.0KB/s   00:00    
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ scp jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile ~/desktop[A[25Glook PAnScriptFile[K[116G p[K[A[43G[25G[2Pcd[41G[25Gls[Kscp jotcheun@unix.ic.ucsc.edu:PAnScriptFile ~desktop[25Gls[Kcd PAnScriptFile[25G[2@look[43G[25Gscp jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile ~/desktop[A[25G[K[116G p[K[A[25Grm[K[Kmv Pa[KAnScriptFile Pa[KA2[K_2ScriptFile
+]0;jotcheun@unix3:prog2[jotcheun@unix3 prog2]$ mv PAnScriptFile PA_2ScriptFile[25Gscp jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile ~/desktop[A[116GnScr[1@_nScrp[1@i[A[113G2nSci[1@r[A[114G[25Glook PAnScriptFile[K[116G r[K[A[43G[25G[2Pcd[41G[25Gls[Kcd PAnScriptFile[25G[2@look[43G[25Gscp jotcheun@unix.ic.ucsc.edu:/afs/cats.ucsc.edu/users/y/jotcheun/12a/programs/prog2/PAnScri ptFile ~/desktopp[A[116G[P[116Gpp[P[A[111G[116G[111G[1@anScrit[1@p[A[112G[P[116Gpp[P[A[111G[116G[111G[1@AnScrit[1@p[A[112GnScr[1@_nScrp[1@i[A[113G2nSci[1@r[A[114GnScrr[P[A[114GScri
+jotcheun@unix.ic.ucsc.edu's password: 
+PA_2ScriptFile
